@@ -38,4 +38,11 @@ public class SegementTree {
         }
         segmentT[currI]=segmentT[2*currI+1]+segmentT[2*currI+2];
     }
+
+    int query(int ql,int qr,int currInd,int l, int r){
+        if(r<ql || l>qr)return 0; //out of bound range
+        if(l<=ql && r>=qr)return segmentT[currInd];//withing range
+        int mid=(l+r)/2;
+        return query(ql, qr, 2*currInd+1, l, mid) + query(ql, qr, 2*currInd+2, mid+1, r); //overlapping
+    }
 }
